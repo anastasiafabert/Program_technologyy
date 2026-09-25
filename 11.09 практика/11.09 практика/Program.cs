@@ -17,6 +17,7 @@
             Console.WriteLine(account.Balance);
             account2.MakeDeposit(10, DateTime.UtcNow, ":)");
             Console.WriteLine(account2.Balance);
+            Console.WriteLine(account2.GetAccountHistory());
             try
             {
                 account2.MakeWithdrawal(100000000, DateTime.UtcNow, ":(");
