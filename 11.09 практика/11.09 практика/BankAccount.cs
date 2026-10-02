@@ -7,6 +7,7 @@ namespace _11._09_практика;
 
 public class BankAccount
 {
+    private readonly decimal _minimumBalance;
 
     static private int s_accountNumberSeed = 1000000000;
     //данные конкретного обьекта
@@ -29,12 +30,17 @@ public class BankAccount
 
 
     private List<Transaction> _allTransactions = new List<Transaction>();
-    public BankAccount(string name, decimal initialBalance)
+    public BankAccount(string name, decimal initialBalance): this (name, initialBalance, 0) { }
+    public BankAccount(string name, decimal initialBalance, decimal minimumBalance)
     {
 
         Owner = name; //this.Owner = name  если одинаковые имена
-        MakeDeposit(initialBalance, DateTime.UtcNow, "Initial balance");
-
+        _minimumBalance = minimumBalance;
+        if (initialBalance < 0)
+        {
+            MakeDeposit(initialBalance, DateTime.UtcNow, "Initial balance");
+        }
+        
         Number = s_accountNumberSeed.ToString();
         s_accountNumberSeed++; //
     }
@@ -53,18 +59,35 @@ public class BankAccount
     }
     public void MakeWithdrawal(decimal amout, DateTime date, string note) //снятие
     {
-        if (amout <= 0)
-        {
-            throw new ArgumentOutOfRangeException(nameof(amout), "Amount of deposit must be posisive");
-        }
-        if (Balance < amout)
-        {
-            throw new InvalidOperationException("Not s...");
-        }
-        var withdrawal = new Transaction(-amout, date, note);
-        _allTransactions.Add(withdrawal);
+        //if (amout <= 0)
+        //{
+        //    throw new ArgumentOutOfRangeException(nameof(amout), "Amount of deposit must be posisive");
+        //}
+        //if (Balance < amout)
+        //{
+        //    throw new InvalidOperationException("Not s...");
+        //}
+        //var withdrawal = new Transaction(-amout, date, note);
+        //_allTransactions.Add(withdrawal);
+
+        ArgumentOutOfRangeException.ThrowIfNegativeOrZero(amout);
+        Transaction? overdraftTransaction = CheckWithdrawlLimit(Balance - amout < _minimumBalance);
+        Transaction? withdrawwal = new(-amout, date, note);
+        _allTransactions.Add(withdrawwal);
+
+        if (overdraftTransaction is not null) _allTransactions.Add(overdraftTransaction);
 
     }
+
+    protected virtual Transaction? CheckWithdrawlLimit(bool v) 
+    {
+        if (v) 
+        {
+            throw new InvalidOperationException("Not sufficient rubls for this withdrawal");
+        }
+        return default;
+    }
+
 
     public string GetAccountHistory ()
     {
