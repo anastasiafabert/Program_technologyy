@@ -32,11 +32,19 @@
             interestEarning.MakeDeposit(10000m, DateTime.UtcNow, " :) ");
             interestEarning.MakeWithdrawal(10m, DateTime.UtcNow, " :) ");
             interestEarning.PerformMountAndTransaction();
-            Console.WriteLine(interestEarning.GetAccountHistory());
+            
 
 
             Console.WriteLine(interestEarning);
             Console.WriteLine(interestEarning.GetAccountHistory());
+            GiftCartAccount giftCart = new("nasy", 1000m, 5000m);
+            giftCart.MakeDeposit(100m, DateTime.UtcNow, " :) ");
+            giftCart.MakeDeposit(10m, DateTime.UtcNow, " :) ;(");
+            giftCart.PerformMountAndTransaction();
+
+            Console.WriteLine(giftCart);
+            Console.WriteLine(giftCart.GetAccountHistory());
+
         }
 
     }
