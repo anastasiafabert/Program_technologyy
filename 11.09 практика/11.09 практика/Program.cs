@@ -7,9 +7,9 @@
     {
         static void Main(string[] args)
         {
-            BankAccount account = new BankAccount("nasy", 5000);
+            BankAccount account = new BankAccount("nasy", 5000000000);
 
-            BankAccount account2 = new BankAccount("nasy", 7000);
+            BankAccount account2 = new BankAccount("nasy", 7000000000);
             Console.WriteLine($"account {account.Balance} {account.Number} {account.Owner}");
             Console.WriteLine($"account {account2.Balance} {account2.Number} {account2.Owner}");
 
@@ -26,6 +26,17 @@
             { 
                 Console.WriteLine(e.Message );
             }
+
+
+            InterestEarningAccount interestEarning = new("nasy", 1000m);
+            interestEarning.MakeDeposit(10000m, DateTime.UtcNow, " :) ");
+            interestEarning.MakeWithdrawal(10m, DateTime.UtcNow, " :) ");
+            interestEarning.PerformMountAndTransaction();
+            Console.WriteLine(interestEarning.GetAccountHistory());
+
+
+            Console.WriteLine(interestEarning);
+            Console.WriteLine(interestEarning.GetAccountHistory());
         }
 
     }

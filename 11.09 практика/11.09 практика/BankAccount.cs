@@ -2,8 +2,10 @@
 using System.Text;
 
 namespace _11._09_практика;
+//BankAccount - потомок от обдект = можно переопределить.
+//виртуальные методы, находящиеся в обджект
 
-internal class BankAccount
+public class BankAccount
 {
 
     static private int s_accountNumberSeed = 1000000000;
@@ -42,10 +44,10 @@ internal class BankAccount
         if (amout <= 0)
         {
             throw new ArgumentOutOfRangeException(nameof(amout), "Amount of deposit must be posisive");
+
+        }
             var deposit = new Transaction(amout, date, note);
             _allTransactions.Add(deposit);
-        }
-
 
 
     }
@@ -80,6 +82,17 @@ internal class BankAccount
 
 
 
+    }
+    //Ключевое слово virtual позволяет в дочернем классе предоставить другую реализацию метода PerformMountAndTransaction
+    public virtual void PerformMountAndTransaction() 
+    {
+       
+    }
+    //переопределяем метод, котооый унаследовали от обджект
+    //Этот метод доожен возвращать строку с состоянием обьекта 
+    public override string ToString()
+    {
+        return $"Type:{GetType().Name} Owner:{Owner} \t Number of account: {Number} ";
     }
 
 
