@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 namespace FoodDelivery
 {
-    //Полиморфизм — List<Delivery> с разными объектами
-    //Pattern matching — if (d is ITrackable trackable)
-    //Вывод — по формату из задания
 
 
     /// <summary>
