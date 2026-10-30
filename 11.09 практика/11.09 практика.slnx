@@ -1,4 +1,6 @@
 <Solution>
-  <Project Path="11.09 практика/BankAccounts.VisualConsole.csproj" />
+  <Project Path="11.09 практика/BankAccounts.VisualConsole.csproj">
+    <BuildDependency Project="BankAccounts.core/BankAccounts.core.csproj" />
+  </Project>
   <Project Path="BankAccounts.core/BankAccounts.core.csproj" Id="7c5f6f71-4f87-436b-85b7-fdcc33fd0d2d" />
 </Solution>
