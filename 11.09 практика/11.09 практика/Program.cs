@@ -92,9 +92,6 @@
             vip.MakeWithdrawal(1000m, DateTime.UtcNow, "покупка");
             vip.PerformMountAndTransaction();
             Console.WriteLine($"VIP: баланс = {vip.Balance} (ожидалось ~19290)");
-
-            AuditLog.Print();   
-            Console.ReadKey();  
         }
 
     }
