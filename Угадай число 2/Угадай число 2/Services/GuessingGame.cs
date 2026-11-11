@@ -10,8 +10,21 @@ namespace Угадай_число_2.Services
     /// </summary>
     public class GuessingGame
     {
-       
 
+        /// <summary>
+        /// Сообщает! другим компонентам о результате проверки попытки.
+        /// </summary>
+        public event Action<GuessResult> GuessChecked;
+
+        /// <summary>
+        /// Сообщает! другим компонентам о победе игрока.
+        /// </summary>
+        public event Action GameWon;
+
+        /// <summary>
+        /// Сообщает! другим компонентам о поражении игрока.
+        /// </summary>
+        public event Action GameLost;
 
         /// <summary>
         /// Хранит генератор случайных чисел, который используется для создания загаданного числа.
@@ -130,6 +143,7 @@ namespace Угадай_число_2.Services
             if (guess == _secretNumber)
             {
                 IsWon = true;
+                GameWon?.Invoke();//событие
                 result = GuessResult.Correct;
             }
             else if (guess < _secretNumber)
@@ -140,9 +154,7 @@ namespace Угадай_число_2.Services
             {
                 result = GuessResult.TooHigh;
             }
-
-            
-
+            GuessChecked?.Invoke(result);
             return result;
         }
 
@@ -172,6 +184,7 @@ namespace Угадай_число_2.Services
             if (guess == _secretNumber)
             {
                 IsWon = true;
+                GameWon?.Invoke();//вызов события
                 result = GuessResult.Correct;
             }
             else if (guess < _secretNumber)
@@ -183,8 +196,11 @@ namespace Угадай_число_2.Services
                 result = GuessResult.TooHigh;
             }
 
-            
-
+            GuessChecked?.Invoke(result);
+            if (!IsWon)
+            {
+                GameLost?.Invoke();
+            }
             return result;
         }
 
