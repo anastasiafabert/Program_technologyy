@@ -9,8 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Sounds\Fail.mp3" />
+    <None Remove="Sounds\Victory.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sounds\Fail.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Sounds\Victory.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="UI\" />
-    <Folder Include="Sounds\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NAudio" Version="3.3.0" />
   </ItemGroup>
 
 </Project>

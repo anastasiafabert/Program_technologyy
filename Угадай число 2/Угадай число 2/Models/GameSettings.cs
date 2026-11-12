@@ -25,11 +25,6 @@ namespace Угадай_число_2.Models
         public int MaxAttempts { get; set; }
 
         /// <summary>
-        /// Определяет, включены ли звуковые эффекты.
-        /// </summary>
-        public bool SoundEnabled { get; set; }
-
-        /// <summary>
         /// Создаёт настройки игры в зависимости от выбранного уровня сложности.
         /// </summary>
         /// <param name="difficulty">Выбранный уровень сложности.</param>
@@ -44,7 +39,6 @@ namespace Угадай_число_2.Models
                         MinNumber = 0,
                         MaxNumber = 50,
                         MaxAttempts = 10,
-                        SoundEnabled = true
                     };
 
                 case DifficultyLevel.Medium:
@@ -52,8 +46,7 @@ namespace Угадай_число_2.Models
                     {
                         MinNumber = 0,
                         MaxNumber = 100,
-                        MaxAttempts = 7,
-                        SoundEnabled = true
+                        MaxAttempts = 7,                       
                     };
 
                 case DifficultyLevel.Hard:
@@ -61,8 +54,7 @@ namespace Угадай_число_2.Models
                     {
                         MinNumber = 0,
                         MaxNumber = 200,
-                        MaxAttempts = 5,
-                        SoundEnabled = true
+                        MaxAttempts = 5,                     
                     };
 
                 default:

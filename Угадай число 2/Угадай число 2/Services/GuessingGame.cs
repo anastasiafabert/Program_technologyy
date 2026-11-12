@@ -14,17 +14,17 @@ namespace Угадай_число_2.Services
         /// <summary>
         /// Сообщает! другим компонентам о результате проверки попытки.
         /// </summary>
-        public event Action<GuessResult> GuessChecked;
+        public event Action<GuessResult>? GuessChecked;
 
         /// <summary>
         /// Сообщает! другим компонентам о победе игрока.
         /// </summary>
-        public event Action GameWon;
+        public event Action? GameWon;
 
         /// <summary>
         /// Сообщает! другим компонентам о поражении игрока.
         /// </summary>
-        public event Action GameLost;
+        public event Action? GameLost;
 
         /// <summary>
         /// Хранит генератор случайных чисел, который используется для создания загаданного числа.
@@ -68,13 +68,20 @@ namespace Угадай_число_2.Services
         }
 
         /// <summary>
-        /// Возвращает количество использованных обычных попыток.
+        /// Возвращает общее количество использованных попыток, включая последний шанс.
         /// </summary>
-        public int AttemptsUsed
+        public int TotalAttemptsUsed
         {
             get
             {
-                return _attemptsUsed;
+                int total = _attemptsUsed;
+
+                if (_extraChanceUsed)
+                {
+                    total++;
+                }
+
+                return total;
             }
         }
 
@@ -211,6 +218,13 @@ namespace Угадай_число_2.Services
         /// <returns>Температурная подсказка о близости к загаданному числу.</returns>
         public TemperatureHint GetTemperatureHint(int guess)
         {
+            if (guess < _settings.MinNumber || guess > _settings.MaxNumber)
+            {
+                throw new ArgumentOutOfRangeException(
+                    nameof(guess),
+                    "Число выходит за пределы игрового диапазона.");
+            }
+
             int difference = Math.Abs(_secretNumber - guess);
 
             if (difference <= 5)

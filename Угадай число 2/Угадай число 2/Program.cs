@@ -19,11 +19,23 @@ namespace Угадай_число_2
             // Создаём настройки игры для лёгкого уровня.
             GameSettings settings = GameSettings.CreateForDifficulty(DifficultyLevel.Easy);
 
+            // Создаём объект статистики.
+            GameStatistics statistics = new GameStatistics();
+
+            // Создаём сервис статистики.
+            StatisticsService statisticsService = new StatisticsService(statistics);
+
+            // Загружаем сохранённую статистику.
+            statisticsService.Load();
+
             // Создаём генератор случайных чисел.
             NumberGenerator numberGenerator = new NumberGenerator();
 
             // Создаём новый игровой раунд.
             GuessingGame game = new GuessingGame(numberGenerator, settings);
+
+            // Подписываем сервис статистики на события игры.
+            statisticsService.Subscribe(game, DifficultyLevel.Easy);
 
             // Создаём обработчик игровых событий.
             GameEventHandler eventHandler = new GameEventHandler();
@@ -32,6 +44,7 @@ namespace Угадай_число_2
             eventHandler.Subscribe(game);
 
             
+           
         }
     }
 }
