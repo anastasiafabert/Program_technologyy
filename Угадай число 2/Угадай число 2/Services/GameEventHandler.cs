@@ -34,7 +34,7 @@ namespace Угадай_число_2.Services
         /// </summary>
         public void OnGameWon()
         {
-            Console.WriteLine("Поздравляем! Вы победили!");
+            Console.WriteLine("Поздравляем! Вы победили! 😸");
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Угадай_число_2.Services
         /// </summary>
         public void OnGameLost()
         {
-            Console.WriteLine("Вы проиграли! Попробуйте ещё раз.");
+            Console.WriteLine("Вы проиграли! Попробуйте ещё раз. 😿");
         }
 
         /// <summary>
