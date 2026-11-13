@@ -1,4 +1,5 @@
-﻿using Угадай_число_2.Models;
+﻿using GameLibrary.Enums;
+using GameLibrary.Models;
 
 namespace Угадай_число_2.UI
 

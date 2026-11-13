@@ -1,9 +1,9 @@
-﻿using System;
-using Угадай_число_2.Enums;
-using Угадай_число_2.Interfaces;
-using Угадай_число_2.Models;
+﻿
+using GameLibrary.Enums;
+using GameLibrary.Interfaces;
+using GameLibrary.Models;
 
-namespace Угадай_число_2.Services
+namespace GameLibrary.Services
 {
     /// <summary>
     /// Управляет игровым процессом и проверяет предположения игрока.

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Угадай_число_2.Enums
+﻿
+namespace GameLibrary.Enums
 {
     /// <summary>
     /// Определяет доступные уровни сложности игры.

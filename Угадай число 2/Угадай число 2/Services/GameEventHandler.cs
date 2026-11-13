@@ -1,5 +1,6 @@
 ﻿using System;
-using Угадай_число_2.Enums;
+using GameLibrary.Enums;
+using GameLibrary.Services;
 
 namespace Угадай_число_2.Services
 {

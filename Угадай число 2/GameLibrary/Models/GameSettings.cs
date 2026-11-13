@@ -1,8 +1,6 @@
-﻿using System;
-using Угадай_число_2.Enums;
+﻿using GameLibrary.Enums;
 
-
-namespace Угадай_число_2.Models
+namespace GameLibrary.Models
 {
     /// <summary>
     /// Хранит настройки текущей игры.

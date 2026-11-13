@@ -1,4 +1,4 @@
-﻿namespace Угадай_число_2.Models
+﻿namespace GameLibrary.Models
 {
     /// <summary>
     /// Хранит общую статистику сыгранных игр.

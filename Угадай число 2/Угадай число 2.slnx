@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="GameLibrary/GameLibrary.csproj" Id="7e519447-ab80-47ca-a68f-ee64c713bf51" />
   <Project Path="Угадай число 2/Угадай число 2.csproj" />
 </Solution>

@@ -1,7 +1,9 @@
 ﻿using Угадай_число_2.UI;
-using Угадай_число_2.Enums;
-using Угадай_число_2.Models;
 using Угадай_число_2.Services;
+
+using GameLibrary.Enums;
+using GameLibrary.Models;
+using GameLibrary.Services;
 
 namespace Угадай_число_2
 {

@@ -1,4 +1,4 @@
-﻿namespace Угадай_число_2.Enums
+﻿namespace GameLibrary.Enums
 {
     /// <summary>
     /// Определяет степень близости предположения игрока к загаданному числу.

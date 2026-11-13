@@ -1,24 +1,16 @@
-﻿using System;
-using Угадай_число_2.Interfaces;
-
-namespace Угадай_число_2.Services
+﻿namespace GameLibrary.Interfaces
 {
     /// <summary>
-    /// Реализует генерацию случайных чисел.
+    /// Определяет способ генерации случайного числа.
     /// </summary>
-    public class NumberGenerator : INumberGenerator
+    public interface INumberGenerator
     {
-        private readonly Random _random = new Random();
-
         /// <summary>
         /// Генерирует случайное число в заданном диапазоне.
         /// </summary>
         /// <param name="min">Минимальное значение.</param>
         /// <param name="max">Максимальное значение.</param>
         /// <returns>Сгенерированное случайное число.</returns>
-        public int Generate(int min, int max)
-        {
-            return _random.Next(min, max + 1);
-        }
+        int Generate(int min, int max);
     }
-} 
+}

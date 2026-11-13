@@ -1,7 +1,7 @@
 ﻿
-using Угадай_число_2.Interfaces;
+using GameLibrary.Interfaces;
 
-namespace Угадай_число_2.Services
+namespace GameLibrary.Services
 {
     /// <summary>
     /// Генерирует заранее заданное число для проверки игровой логики.
@@ -30,6 +30,13 @@ namespace Угадай_число_2.Services
         /// <returns>Заданное число.</returns>
         public int Generate(int min, int max)
         {
+            if (_number < min || _number > max)//Если число входит в диапазон — возвращаем его.
+            {
+                throw new ArgumentOutOfRangeException(//Если не входит — сообщаем об ошибке через искл
+                    nameof(_number),
+                    "Заданное число не входит в допустимый диапазон.");
+            }
+
             return _number;
         }
     }

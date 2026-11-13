@@ -1,10 +1,10 @@
 ﻿using System.IO;
 using System.Text.Json;
-using Угадай_число_2.Models;
-using Угадай_число_2.Enums;
+using GameLibrary.Models;
+using GameLibrary.Enums;
 
 
-namespace Угадай_число_2.Services
+namespace GameLibrary.Services
 {
     /// <summary>
     /// Управляет статистикой игрового процесса.
