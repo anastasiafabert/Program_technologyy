@@ -1,17 +1,19 @@
-﻿using System;
+﻿
 using GameLibrary.Enums;
 using GameLibrary.Services;
 
 namespace Угадай_число_2.Services
 {
     /// <summary>
-    /// Обрабатывает события игрового процесса.
+    /// Обрабатывает события игрового процесса
+    /// и выводит сообщения для пользователя.
     /// </summary>
     public class GameEventHandler
     {
         /// <summary>
         /// Обрабатывает результат проверки предположения игрока.
         /// </summary>
+        /// <param name="result">Результат проверки числа.</param>
         public void OnGuessChecked(GuessResult result)
         {
             switch (result)
@@ -50,8 +52,13 @@ namespace Угадай_число_2.Services
         /// Подписывает обработчик на события игрового процесса.
         /// </summary>
         /// <param name="game">Текущий игровой раунд.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Выбрасывается, если игра равна null.
+        /// </exception>
         public void Subscribe(GuessingGame game)
         {
+            ArgumentNullException.ThrowIfNull(game);
+
             game.GuessChecked += OnGuessChecked;
             game.GameWon += OnGameWon;
             game.GameLost += OnGameLost;

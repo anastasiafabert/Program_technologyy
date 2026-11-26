@@ -1,63 +1,67 @@
-﻿using GameLibrary.Enums;
+﻿
+using GameLibrary.Interfaces;
 
 namespace GameLibrary.Models
 {
     /// <summary>
-    /// Хранит настройки текущей игры.
+    /// Хранит настройки игры:
+    /// диапазон загадываемых чисел и максимальное количество попыток.
     /// </summary>
     public class GameSettings
     {
         /// <summary>
-        /// Минимальное число для угадывания.
+        /// Возвращает минимальное число игрового диапазона.
         /// </summary>
-        public int MinNumber { get; set; }
+        public int MinNumber { get; }
 
         /// <summary>
-        /// Максимальное число для угадывания.
+        /// Возвращает максимальное число игрового диапазона.
         /// </summary>
-        public int MaxNumber { get; set; }
+        public int MaxNumber { get; }
 
         /// <summary>
-        /// Максимальное количество попыток игрока.
+        /// Возвращает максимальное количество попыток игрока.
         /// </summary>
-        public int MaxAttempts { get; set; }
+        public int MaxAttempts { get; }
 
         /// <summary>
-        /// Создаёт настройки игры в зависимости от выбранного уровня сложности.
+        /// Создаёт настройки игры с заданными параметрами.
+        /// </summary>
+        /// <param name="minNumber">Минимальное число игрового диапазона.</param>
+        /// <param name="maxNumber">Максимальное число игрового диапазона.</param>
+        /// <param name="maxAttempts">Максимальное количество попыток.</param>
+        private GameSettings(int minNumber, int maxNumber, int maxAttempts)
+        {
+            if (minNumber > maxNumber)
+            {
+                throw new ArgumentException(
+                    "Минимальное число не может быть больше максимального.");
+            }
+
+            if (maxAttempts <= 0)
+            {
+                throw new ArgumentException(
+                    "Количество попыток должно быть больше нуля.");
+            }
+
+            MinNumber = minNumber;
+            MaxNumber = maxNumber;
+            MaxAttempts = maxAttempts;
+        }
+
+        /// <summary>
+        /// Создаёт настройки игры на основе выбранного уровня сложности.
         /// </summary>
         /// <param name="difficulty">Выбранный уровень сложности.</param>
-        /// <returns>Объект с настройками игры.</returns>
-        public static GameSettings CreateForDifficulty(DifficultyLevel difficulty)
+        /// <returns>Настройки игры для выбранного уровня сложности.</returns>
+        public static GameSettings CreateForDifficulty(IDifficulty difficulty)
         {
-            switch (difficulty)
-            {
-                case DifficultyLevel.Easy:
-                    return new GameSettings
-                    {
-                        MinNumber = 0,
-                        MaxNumber = 50,
-                        MaxAttempts = 10,
-                    };
+            ArgumentNullException.ThrowIfNull(difficulty);
 
-                case DifficultyLevel.Medium:
-                    return new GameSettings
-                    {
-                        MinNumber = 0,
-                        MaxNumber = 100,
-                        MaxAttempts = 7,                       
-                    };
-
-                case DifficultyLevel.Hard:
-                    return new GameSettings
-                    {
-                        MinNumber = 0,
-                        MaxNumber = 200,
-                        MaxAttempts = 5,                     
-                    };
-
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(difficulty));
-            }
+            return new GameSettings(
+                difficulty.MinNumber,
+                difficulty.MaxNumber,
+                difficulty.MaxAttempts);
         }
     }
 }

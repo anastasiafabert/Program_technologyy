@@ -11,7 +11,7 @@ namespace GameLibrary.Services
         /// <summary>
         /// Число, которое будет возвращать генератор.
         /// </summary>
-        private readonly int _number;//хранит заранее заданное число
+        private readonly int _number;
 
         /// <summary>
         /// Создаёт генератор с заданным числом.
@@ -28,11 +28,22 @@ namespace GameLibrary.Services
         /// <param name="min">Минимальное значение диапазона.</param>
         /// <param name="max">Максимальное значение диапазона.</param>
         /// <returns>Заданное число.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// Выбрасывается, если диапазон некорректен
+        /// или заданное число не входит в него.
+        /// </exception>
         public int Generate(int min, int max)
         {
-            if (_number < min || _number > max)//Если число входит в диапазон — возвращаем его.
+            if (min > max)
             {
-                throw new ArgumentOutOfRangeException(//Если не входит — сообщаем об ошибке через искл
+                throw new ArgumentOutOfRangeException(
+                    nameof(min),
+                    "Минимальное значение не может быть больше максимального.");
+            }
+
+            if (_number < min || _number > max)
+            {
+                throw new ArgumentOutOfRangeException(
                     nameof(_number),
                     "Заданное число не входит в допустимый диапазон.");
             }

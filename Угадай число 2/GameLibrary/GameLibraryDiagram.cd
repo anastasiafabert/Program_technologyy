@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameLibrary.Models.MediumDifficulty">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAQQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\MediumDifficulty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameLibrary.Models.HardDifficulty">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAQQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\HardDifficulty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameLibrary.Models.GameSettings">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAQAAAAAEAAAAAAAAAACAAAA=</HashCode>
+      <FileName>Models\GameSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameLibrary.Services.FixedNumberGenerator">
+    <Position X="7.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBAAAA=</HashCode>
+      <FileName>Services\FixedNumberGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameLibrary.Services.NumberGenerator">
+    <Position X="3.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAE=</HashCode>
+      <FileName>Services\NumberGenerator.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameLibrary.Services.GuessingGame">
+    <Position X="5.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BACAACAgAIABAAAAgAAIAAAAAAASAAQAAAEEFAiBQgA=</HashCode>
+      <FileName>Services\GuessingGame.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameSettings" />
+      <Property Name="GameStatistics" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameLibrary.Services.StatisticsService">
+    <Position X="3.5" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgIEAAAAAACAAAAAAABAQgAACAAAAAABAAAABQAQ=</HashCode>
+      <FileName>Services\StatisticsService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameStatistics" />
+      <Property Name="GuessingGame" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameLibrary.Models.GameStatistics">
+    <Position X="7" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAgAgAAAAAAAAAAAAAAAABoAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GameStatistics.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameLibrary.Models.EasyDifficulty">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAQQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\EasyDifficulty.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="GameLibrary.Interfaces.INumberGenerator">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Interfaces\INumberGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="GameLibrary.Interfaces.IDifficulty">
+    <Position X="1.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAQQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDifficulty.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="GameLibrary.Enums.GuessResult">
+    <Position X="3.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAEIAAA=</HashCode>
+      <FileName>Enums\GuessResult.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="GameLibrary.Enums.TemperatureHint">
+    <Position X="7.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAIAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums\TemperatureHint.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Угадай_число_2.Services.GameEventHandler" Collapsed="true">
-    <Position X="12.5" Y="4.25" Width="1.5" />
+  <Class Name="Угадай_число_2.Services.GameEventHandler">
+    <Position X="13.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAEAAEAAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Services\GameEventHandler.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Угадай_число_2.UI.GameMenu" Collapsed="true">
+  <Class Name="Угадай_число_2.UI.GameMenu">
     <Position X="10.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAAAIQAAAAAAAAAAAAABAAACAIAAAAQAA=</HashCode>
       <FileName>UI\GameMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Угадай_число_2.Program" Collapsed="true">
-    <Position X="13.5" Y="3" Width="1.5" />
+  <Class Name="Угадай_число_2.Program">
+    <Position X="11.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAABAAAAAQ=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameMenu" />
+      <Property Name="GameEventHandler" />
+    </ShowAsAssociation>
   </Class>
-  <Interface Name="GameLibrary.Interfaces.INumberGenerator" Collapsed="true">
-    <Position X="12.25" Y="1.75" Width="1.5" />
-    <TypeIdentifier />
-  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

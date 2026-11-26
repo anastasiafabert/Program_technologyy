@@ -1,11 +1,11 @@
-﻿using GameLibrary.Enums;
+﻿
+using GameLibrary.Interfaces;
 using GameLibrary.Models;
 
 namespace Угадай_число_2.UI
-
 {
     /// <summary>
-    /// Отвечает за отображение главного меню игры.
+    /// Отвечает за отображение меню игры и игровой статистики.
     /// </summary>
     public class GameMenu
     {
@@ -26,7 +26,7 @@ namespace Угадай_число_2.UI
         /// <summary>
         /// Получает выбранный пользователем пункт меню.
         /// </summary>
-        /// <returns>Номер выбранного пункта.</returns>
+        /// <returns>Текст, введённый пользователем.</returns>
         public string GetMenuChoice()
         {
             return Console.ReadLine() ?? string.Empty;
@@ -35,6 +35,12 @@ namespace Угадай_число_2.UI
         /// <summary>
         /// Проверяет правильность выбора пользователя.
         /// </summary>
+        /// <param name="choice">Введённый пользователем текст.</param>
+        /// <param name="maxChoice">Максимальный допустимый номер пункта.</param>
+        /// <returns>
+        /// true, если введённое значение является допустимым номером;
+        /// иначе false.
+        /// </returns>
         public bool IsValidChoice(string choice, int maxChoice)
         {
             if (!int.TryParse(choice, out int number))
@@ -46,7 +52,7 @@ namespace Угадай_число_2.UI
         }
 
         /// <summary>
-        /// Сообщает пользователю о неправильном выборе.
+        /// Выводит сообщение о неправильном выборе пользователя.
         /// </summary>
         public void ShowInvalidChoice()
         {
@@ -54,31 +60,41 @@ namespace Угадай_число_2.UI
         }
 
         /// <summary>
-        /// Отображает меню выбора уровня сложности.
+        /// Отображает доступные уровни сложности.
         /// </summary>
-        public void ShowDifficultyMenu()
+        /// <param name="difficulties">Список доступных уровней сложности.</param>
+        public void ShowDifficultyMenu(IReadOnlyList<IDifficulty> difficulties)
         {
             Console.WriteLine();
             Console.WriteLine(" ВЫБОР СЛОЖНОСТИ ");
-            Console.WriteLine("1. Лёгкий (0–50, 10 попыток)");
-            Console.WriteLine("2. Средний (0–100, 7 попыток)");
-            Console.WriteLine("3. Сложный (0–200, 5 попыток)");
+
+            for (int i = 0; i < difficulties.Count; i++)
+            {
+                IDifficulty difficulty = difficulties[i];
+
+                Console.WriteLine(
+                    $"{i + 1}. {difficulty.Name} " +
+                    $"({difficulty.MinNumber}–{difficulty.MaxNumber}, " +
+                    $"{difficulty.MaxAttempts} попыток)");
+            }
+
             Console.Write("Выберите уровень сложности: ");
         }
 
         /// <summary>
         /// Получает выбранный пользователем уровень сложности.
         /// </summary>
-        /// <returns>Номер выбранного уровня.</returns>
+        /// <returns>Введённый пользователем номер уровня.</returns>
         public string GetDifficultyChoice()
         {
-            //если ввод вернул null, вместо него используем пустую строку.
             return Console.ReadLine() ?? string.Empty;
         }
 
         /// <summary>
-        /// Отображает общую статистику сыгранных игр.
+        /// Отображает общую статистику сыгранных игр
+        /// и лучшие результаты по уровням сложности.
         /// </summary>
+        /// <param name="statistics">Объект игровой статистики.</param>
         public void ShowStatistics(GameStatistics statistics)
         {
             Console.WriteLine();
@@ -94,13 +110,19 @@ namespace Угадай_число_2.UI
             Console.WriteLine();
             Console.WriteLine("Лучшие результаты по сложности:");
 
-            Console.WriteLine($"Лёгкий уровень: {statistics.BestEasyResult}");
-            Console.WriteLine($"Средний уровень: {statistics.BestMediumResult}");
-            Console.WriteLine($"Сложный уровень: {statistics.BestHardResult}");
+            if (statistics.BestResultsByDifficulty.Count == 0)
+            {
+                Console.WriteLine("Рекордов пока нет.");
+            }
+            else
+            {
+                foreach (var result in statistics.BestResultsByDifficulty)
+                {
+                    Console.WriteLine($"{result.Key}: {result.Value} попыток");
+                }
+            }
 
             Console.WriteLine("--------------------------");
         }
-
-
     }
 }
