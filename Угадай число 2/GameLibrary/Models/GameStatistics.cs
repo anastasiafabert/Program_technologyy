@@ -7,7 +7,7 @@ namespace GameLibrary.Models
     /// Хранит общую статистику сыгранных игр,
     /// включая количество побед, поражений и лучшие результаты.
     /// </summary>
-    public class GameStatistics : Interfaces.IDifficulty
+    public class GameStatistics 
     {
         /// <summary>
         /// Возвращает и задаёт общее количество сыгранных игр.

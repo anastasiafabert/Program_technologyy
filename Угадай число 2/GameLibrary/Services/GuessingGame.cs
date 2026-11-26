@@ -9,7 +9,7 @@ namespace GameLibrary.Services
     /// Управляет игровым процессом, проверяет предположения игрока
     /// и сообщает другим компонентам о результатах игры.
     /// </summary>
-    public class GuessingGame : INumberGenerator
+    public class GuessingGame 
     {
         /// <summary>
         /// Сообщает другим компонентам о результате проверки попытки.
@@ -128,7 +128,12 @@ namespace GameLibrary.Services
         /// </summary>
         public bool IsWon { get; private set; }
 
-        public GameSettings GameSettings
+        /// <summary>
+        /// Возвращает настройки текущей игры.
+        /// </summary>
+        public GameSettings Settings => _settings;
+
+        public GameStatistics GameStatistics
         {
             get => default;
             set
@@ -136,7 +141,7 @@ namespace GameLibrary.Services
             }
         }
 
-        public GameStatistics GameStatistics
+        public INumberGenerator INumberGenerator
         {
             get => default;
             set

@@ -1,19 +1,18 @@
 ﻿
-using System.Collections.Generic;
-
-using Угадай_число_2.UI;
-using Угадай_число_2.Services;
-
 using GameLibrary.Enums;
 using GameLibrary.Interfaces;
 using GameLibrary.Models;
 using GameLibrary.Services;
+using System;
+using System.Collections.Generic;
+using Угадай_число_2.Models;
+using Угадай_число_2.Services;
+using Угадай_число_2.UI;
 
 namespace Угадай_число_2
 {
     /// <summary>
-    /// Содержит точку входа в приложение
-    /// и запускает игру «Угадай число».
+    /// Содержит точку входа в приложение.
     /// </summary>
     internal class Program
     {
@@ -33,6 +32,22 @@ namespace Угадай_число_2
             }
         }
 
+        public ConsoleUserInterface ConsoleUserInterface
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public MultiplayerGame MultiplayerGame
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Запускает приложение.
         /// </summary>
@@ -41,7 +56,6 @@ namespace Угадай_число_2
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            // Создаём список доступных уровней сложности.
             List<IDifficulty> difficulties = new List<IDifficulty>
             {
                 new EasyDifficulty(),
@@ -49,43 +63,38 @@ namespace Угадай_число_2
                 new HardDifficulty()
             };
 
-            // Выбираем первый уровень сложности по умолчанию.
             IDifficulty selectedDifficulty = difficulties[0];
 
-            // Создаём настройки игры на основе выбранной сложности.
             GameSettings settings =
                 GameSettings.CreateForDifficulty(selectedDifficulty);
 
-            // Создаём объект статистики.
             GameStatistics statistics = new GameStatistics();
 
-            // Создаём сервис статистики.
             StatisticsService statisticsService =
                 new StatisticsService(statistics);
 
-            // Загружаем сохранённую статистику.
             statisticsService.Load();
 
-            // Создаём генератор случайных чисел.
             NumberGenerator numberGenerator = new NumberGenerator();
 
-            // Создаём обработчик игровых событий.
             GameEventHandler eventHandler = new GameEventHandler();
 
-            // Создаём объект главного меню.
             GameMenu menu = new GameMenu();
 
-            // Показывает, продолжает ли работать приложение.
+            IUserInterface userInterface = new ConsoleUserInterface();
+
+            MultiplayerGame multiplayerGame =
+                new MultiplayerGame(userInterface);
+
             bool isRunning = true;
 
-            // Повторяем меню, пока пользователь не выберет выход.
             while (isRunning)
             {
                 menu.ShowMainMenu();
 
                 string choice = menu.GetMenuChoice();
 
-                if (!menu.IsValidChoice(choice, 4))
+                if (!menu.IsValidChoice(choice, 5))
                 {
                     menu.ShowInvalidChoice();
                     continue;
@@ -94,14 +103,10 @@ namespace Угадай_число_2
                 switch (choice)
                 {
                     case "1":
-                        // Создаём новый игровой раунд с выбранной сложностью.
                         GuessingGame game =
                             new GuessingGame(numberGenerator, settings);
 
-                        // Подписываем сервис статистики на события игры.
                         statisticsService.Subscribe(game, selectedDifficulty);
-
-                        // Подписываем обработчик игровых событий.
                         eventHandler.Subscribe(game);
 
                         Console.WriteLine();
@@ -111,7 +116,6 @@ namespace Угадай_число_2
                         Console.WriteLine(
                             $"У вас есть {settings.MaxAttempts} попыток.");
 
-                        // Выполняем обычные попытки.
                         while (!game.IsWon && game.AttemptsRemaining > 0)
                         {
                             Console.WriteLine(
@@ -120,56 +124,48 @@ namespace Угадай_число_2
 
                             string input = Console.ReadLine() ?? string.Empty;
 
-                            if (int.TryParse(input, out int guess))
-                            {
-                                if (guess < settings.MinNumber ||
-                                    guess > settings.MaxNumber)
-                                {
-                                    Console.WriteLine(
-                                        "Число выходит за пределы игрового диапазона.");
-                                }
-                                else
-                                {
-                                    GuessResult result = game.CheckGuess(guess);
-
-                                    if (result != GuessResult.Correct)
-                                    {
-                                        TemperatureHint hint =
-                                            game.GetTemperatureHint(guess);
-
-                                        switch (hint)
-                                        {
-                                            case TemperatureHint.Cold:
-                                                Console.WriteLine(
-                                                    "Холодно! Вы далеко от загаданного числа.");
-                                                break;
-
-                                            case TemperatureHint.Warm:
-                                                Console.WriteLine(
-                                                    "Тепло! Вы приближаетесь к загаданному числу.");
-                                                break;
-
-                                            case TemperatureHint.Hot:
-                                                Console.WriteLine(
-                                                    "Горячо! Вы совсем близко!");
-                                                break;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine(
-                                            $"🔥 Ваша серия побед: {statistics.CurrentWinStreak}");
-                                    }
-                                }
-                            }
-                            else
+                            if (!int.TryParse(input, out int guess))
                             {
                                 Console.WriteLine(
                                     "Ошибка! Необходимо ввести целое число.");
+                                continue;
+                            }
+
+                            if (guess < settings.MinNumber ||
+                                guess > settings.MaxNumber)
+                            {
+                                Console.WriteLine(
+                                    "Число выходит за пределы игрового диапазона.");
+                                continue;
+                            }
+
+                            GuessResult result = game.CheckGuess(guess);
+
+                            if (result != GuessResult.Correct)
+                            {
+                                TemperatureHint hint =
+                                    game.GetTemperatureHint(guess);
+
+                                switch (hint)
+                                {
+                                    case TemperatureHint.Cold:
+                                        Console.WriteLine(
+                                            "Холодно! Вы далеко от загаданного числа.");
+                                        break;
+
+                                    case TemperatureHint.Warm:
+                                        Console.WriteLine(
+                                            "Тепло! Вы приближаетесь к загаданному числу.");
+                                        break;
+
+                                    case TemperatureHint.Hot:
+                                        Console.WriteLine(
+                                            "Горячо! Вы совсем близко!");
+                                        break;
+                                }
                             }
                         }
 
-                        // Предоставляем последний шанс после обычных попыток.
                         if (!game.IsWon && game.CanUseExtraChance)
                         {
                             Console.WriteLine();
@@ -183,39 +179,69 @@ namespace Угадай_число_2
                                 string extraInput =
                                     Console.ReadLine() ?? string.Empty;
 
-                                if (int.TryParse(extraInput, out int extraGuess))
-                                {
-                                    if (extraGuess < settings.MinNumber ||
-                                        extraGuess > settings.MaxNumber)
-                                    {
-                                        Console.WriteLine(
-                                            "Число выходит за пределы игрового диапазона.");
-                                    }
-                                    else
-                                    {
-                                        game.UseExtraChance(extraGuess);
-                                    }
-                                }
-                                else
+                                if (!int.TryParse(extraInput, out int extraGuess))
                                 {
                                     Console.WriteLine(
                                         "Ошибка! Необходимо ввести целое число.");
+                                    continue;
                                 }
+
+                                if (extraGuess < settings.MinNumber ||
+                                    extraGuess > settings.MaxNumber)
+                                {
+                                    Console.WriteLine(
+                                        "Число выходит за пределы игрового диапазона.");
+                                    continue;
+                                }
+
+                                game.UseExtraChance(extraGuess);
                             }
                         }
 
                         break;
 
                     case "2":
-                        // Показываем статистику.
-                        menu.ShowStatistics(statistics);
+                        string firstName = userInterface.ReadInput(
+                            "Введите имя первого игрока: ");
+
+                        string secondName = userInterface.ReadInput(
+                            "Введите имя второго игрока: ");
+
+                        if (string.IsNullOrWhiteSpace(firstName) ||
+                            string.IsNullOrWhiteSpace(secondName))
+                        {
+                            userInterface.ShowMessage(
+                                "Имена игроков не могут быть пустыми.");
+                            break;
+                        }
+
+                        Player firstPlayer = new Player(firstName);
+                        Player secondPlayer = new Player(secondName);
+
+                        GuessingGame multiplayerRound =
+                            new GuessingGame(numberGenerator, settings);
+
+                        statisticsService.Subscribe(
+                            multiplayerRound, selectedDifficulty);
+
+                        eventHandler.Subscribe(multiplayerRound);
+
+                        multiplayerGame.Play(
+                            firstPlayer,
+                            secondPlayer,
+                            multiplayerRound);
+
                         break;
 
                     case "3":
-                        // Показываем все доступные уровни сложности.
+                        menu.ShowStatistics(statistics);
+                        break;
+
+                    case "4":
                         menu.ShowDifficultyMenu(difficulties);
 
-                        string difficultyChoice = menu.GetDifficultyChoice();
+                        string difficultyChoice =
+                            menu.GetDifficultyChoice();
 
                         if (!menu.IsValidChoice(
                             difficultyChoice, difficulties.Count))
@@ -224,15 +250,15 @@ namespace Угадай_число_2
                         }
                         else
                         {
-                            // Получаем выбранный уровень из списка.
                             int difficultyIndex =
                                 int.Parse(difficultyChoice) - 1;
 
-                            selectedDifficulty = difficulties[difficultyIndex];
+                            selectedDifficulty =
+                                difficulties[difficultyIndex];
 
-                            // Создаём настройки для выбранного уровня.
                             settings =
-                                GameSettings.CreateForDifficulty(selectedDifficulty);
+                                GameSettings.CreateForDifficulty(
+                                    selectedDifficulty);
 
                             Console.WriteLine(
                                 $"Выбрана сложность: {selectedDifficulty.Name}.");
@@ -240,7 +266,7 @@ namespace Угадай_число_2
 
                         break;
 
-                    case "4":
+                    case "5":
                         Console.WriteLine("Выход из игры...");
                         isRunning = false;
                         break;

@@ -9,6 +9,14 @@ namespace Угадай_число_2.UI
     /// </summary>
     public class GameMenu
     {
+        public GameStatistics GameStatistics
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Отображает главное меню игры.
         /// </summary>
@@ -17,9 +25,10 @@ namespace Угадай_число_2.UI
             Console.WriteLine();
             Console.WriteLine(" ИГРА УГАДАЙ ЧИСЛО ");
             Console.WriteLine("1. Начать игру");
-            Console.WriteLine("2. Посмотреть статистику");
-            Console.WriteLine("3. Изменить сложность");
-            Console.WriteLine("4. Выход");
+            Console.WriteLine("2. Мультиплеер");
+            Console.WriteLine("3. Посмотреть статистику");
+            Console.WriteLine("4. Изменить сложность");
+            Console.WriteLine("5. Выход");
             Console.Write("Выберите действие: ");
         }
 

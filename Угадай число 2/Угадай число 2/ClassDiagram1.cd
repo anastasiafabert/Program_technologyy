@@ -3,9 +3,12 @@
   <Class Name="Угадай_число_2.Services.GameEventHandler">
     <Position X="13.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAEAAEAAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAEAAEAAACAAAAAAAAAAgAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Services\GameEventHandler.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GuessingGame" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Угадай_число_2.UI.GameMenu">
     <Position X="10.25" Y="3.5" Width="1.5" />
@@ -13,17 +16,43 @@
       <HashCode>AAAAACAAAAAAAAIQAAAAAAAAAAAAABAAACAIAAAAQAA=</HashCode>
       <FileName>UI\GameMenu.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="GameStatistics" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Угадай_число_2.Program">
     <Position X="11.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAABAAAAAQ=</HashCode>
+      <HashCode>AAAAAAAAAAAAIAAAAAgAAAACAAAAAAAAAAAABAAAAAQ=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
       <Property Name="GameMenu" />
       <Property Name="GameEventHandler" />
+      <Property Name="ConsoleUserInterface" />
+      <Property Name="MultiplayerGame" />
     </ShowAsAssociation>
   </Class>
+  <Class Name="Угадай_число_2.Services.ConsoleUserInterface" Collapsed="true">
+    <Position X="15" Y="2" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameLibrary.Services.MultiplayerGame" Collapsed="true">
+    <Position X="15.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GameLibrary.Models.GameStatistics" Collapsed="true">
+    <Position X="12.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="GameLibrary.Services.GuessingGame" Collapsed="true">
+    <Position X="14.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="GameLibrary.Interfaces.IUserInterface" Collapsed="true">
+    <Position X="8.75" Y="1" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

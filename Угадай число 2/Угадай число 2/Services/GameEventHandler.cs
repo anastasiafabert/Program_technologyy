@@ -10,6 +10,14 @@ namespace Угадай_число_2.Services
     /// </summary>
     public class GameEventHandler
     {
+        public GuessingGame GuessingGame
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Обрабатывает результат проверки предположения игрока.
         /// </summary>
